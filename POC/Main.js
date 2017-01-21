@@ -2,7 +2,7 @@ var canvas = document.getElementById("renderCanvas");
 var engine = new BABYLON.Engine(canvas, true);
 
 var scene = new BABYLON.Scene(engine);
-//scene.debugLayer.show();
+scene.debugLayer.show();
 
 //Adding a light
 var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
@@ -18,7 +18,7 @@ camera.inertia = 0.5;
 engine.displayLoadingUI();
 var test = new DragNDrop(-10);
 
-//var test = new DragNDrop(10);
+var test = new DragNDrop(10);
 
 var groundSize = 60;
 var wallWidth = groundSize;
