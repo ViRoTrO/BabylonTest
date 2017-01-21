@@ -1,10 +1,10 @@
-var DragNDrop = function (pos){
+var DragNDrop = function (pos,model, path, modelFilename, texturePath){
 
 	var currentObject;
 	var currentObjectSize;
-
+	
 	// The first parameter can be used to specify which mesh to import. Here we import all meshes
-	BABYLON.SceneLoader.ImportMesh("model", "Assets/Models/", "FR11.babylon", scene, function (newMeshes) 
+	BABYLON.SceneLoader.ImportMesh(model, path, modelFilename, scene, function (newMeshes) 
 	{
 	    // Set the target of the camera to the first imported mesh
 	    // camera.target = newMeshes[0];
@@ -14,37 +14,50 @@ var DragNDrop = function (pos){
 	    currentObjectSize = extendSize.scale(2/100);
 	    currentObject.rotation.y = 0;
 	    var materialBox = new BABYLON.StandardMaterial("frameMat", scene);
-	    materialBox.diffuseTexture = new BABYLON.Texture("Assets/Textures/FR11_A50247377.jpg", scene);
+	    materialBox.diffuseTexture = new BABYLON.Texture(texturePath, scene);
 	    currentObject.material = materialBox;
 	    currentObject.position.y = 2;
 	    currentObject.position.x = pos;
 	    engine.hideLoadingUI();
+	    
+	    //temp();
+	    currentObject.temp = temp;
 
-	    //currentObject.classRef = this; 
+	    currentObject.temp();
+
+	    currentObject.onPointerDown = onPointerDown;
+	    currentObject.onPointerUp = onPointerUp;
+	    currentObject.onPointerMove = onPointerMove;
+
 
 	});
 
+	function temp()
+	{
+		console.log("Testing");
+	}
+	
 	var isDragging = false;
-	function onPointerDown(evt) {
-	    var pickResult = scene.pick(scene.pointerX, scene.pointerY, function (mesh){
+	function onPointerDown() {
+	    // var pickResult = scene.pick(scene.pointerX, scene.pointerY, function (mesh){
 	       
-	        if(mesh == currentObject)
-	            return mesh;
-	     });
+	    //     if(mesh == currentObject)
+	    //         return mesh;
+	    //  });
 
-	    if(pickResult.pickedPoint)
-	     {
+	    // if(pickResult.pickedPoint)
+	    //  {
 	        isDragging = true;
-	        camera.detachControl(canvas, false);
-	     }
+	        //camera.detachControl(canvas, false);
+	     // }
 	};
 
-	function onPointerUp(evt) {
+	function onPointerUp() {
 	    isDragging = false;
 	    camera.attachControl(canvas, false);
 	};
 
-	function onPointerMove(evt) {
+	function onPointerMove() {
 	     
 	     if(!isDragging)   
 	        return;
@@ -140,13 +153,5 @@ var DragNDrop = function (pos){
 
 	}
 
-	canvas.addEventListener("pointerdown", onPointerDown, false);
-	canvas.addEventListener("pointerup", onPointerUp, false);
-	canvas.addEventListener("pointermove", onPointerMove, false);
-
-	scene.onDispose = function () {
-	    canvas.removeEventListener("pointerdown", onPointerDown);
-	    canvas.removeEventListener("pointerup", onPointerUp);
-	    canvas.removeEventListener("pointermove", onPointerMove);
-	}
+	
 }
