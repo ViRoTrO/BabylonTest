@@ -20,6 +20,8 @@ var DragNDrop = function (pos){
 	    currentObject.position.x = pos;
 	    engine.hideLoadingUI();
 
+	    //currentObject.classRef = this; 
+
 	});
 
 	var isDragging = false;
