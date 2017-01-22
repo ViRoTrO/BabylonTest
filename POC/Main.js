@@ -2,6 +2,7 @@ var canvas = document.getElementById("renderCanvas");
 var engine = new BABYLON.Engine(canvas, true);
 
 var scene = new BABYLON.Scene(engine);
+scene.collisionsEnabled = true;
 //scene.debugLayer.show();
 
 //Adding a light
@@ -13,13 +14,14 @@ var camera = new BABYLON.ArcRotateCamera("Camera",-1.58, 1.13, 50, new BABYLON.V
 //var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0,20,-30), scene);
 camera.attachControl(canvas, false);
 camera.inertia = 0.5;
+camera.checkCollisions = true;
+
 
 // Show loading screen
 engine.displayLoadingUI();
-var test = new DragNDrop(-10,"model", "Assets/Models/", "FR11.babylon","Assets/Textures/FR11_A50247377.jpg");
+var test = new DragNDrop(-10,"model", "Assets/Models/", "FR11.babylon","Assets/Textures/FR11_A50247377.jpg", "frame");
 
-var test2 = new DragNDrop(10,"DR08", "Assets/Models/", "DR08.babylon","Assets/Textures/DR08_00291674.jpg");
-
+var test2 = new DragNDrop(10,"DR08", "Assets/Models/", "DR08.babylon","Assets/Textures/DR08_00291674.jpg", "door");
 
 var groundSize = 60;
 var wallWidth = groundSize;
@@ -134,3 +136,4 @@ function onPointerDown(evt) {
          
  
     };
+

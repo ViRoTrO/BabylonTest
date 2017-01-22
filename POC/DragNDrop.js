@@ -1,8 +1,8 @@
-var DragNDrop = function (pos,model, path, modelFilename, texturePath){
+var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 
 	var currentObject;
 	var currentObjectSize;
-	
+	var isSnapped;
 	// The first parameter can be used to specify which mesh to import. Here we import all meshes
 	BABYLON.SceneLoader.ImportMesh(model, path, modelFilename, scene, function (newMeshes) 
 	{
@@ -20,23 +20,14 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath){
 	    currentObject.position.x = pos;
 	    engine.hideLoadingUI();
 	    
-	    //temp();
-	    currentObject.temp = temp;
-
-	    currentObject.temp();
-
 	    currentObject.onPointerDown = onPointerDown;
 	    currentObject.onPointerUp = onPointerUp;
 	    currentObject.onPointerMove = onPointerMove;
-
-
+	    currentObject.uid = Global.meshCounter ++;
+	    currentObject.tag = tag;
+	    new CheckCollisions(currentObject);
 	});
 
-	function temp()
-	{
-		console.log("Testing");
-	}
-	
 	var isDragging = false;
 	function onPointerDown() {
 	    // var pickResult = scene.pick(scene.pointerX, scene.pointerY, function (mesh){
@@ -59,9 +50,27 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath){
 
 	function onPointerMove() {
 	     
-	     if(!isDragging)   
+	     if(!isDragging || isSnapped)   
 	        return;
-	     var tempMesh;
+
+	    if(CollisionDictionary[currentObject.uid].length > 0)
+	    {
+	    	
+	    	var collMesh = CollisionDictionary[currentObject.uid][0];
+	    	if(collMesh && tag == "door" && collMesh.tag == "frame")
+	    	{
+	    		console.log(currentObject.scaling);
+	    		currentObject.parent = collMesh
+	    		isSnapped = true;
+	    		currentObject.scaling = new BABYLON.Vector3(1,1,1);
+	    		currentObject.locallyTranslate(new BABYLON.Vector3(5, 12, -270));
+	    		return;
+	    	}
+
+	    	
+	    }
+
+	      var tempMesh;
 	     // We try to pick an object
 	     var pickResult = scene.pick(scene.pointerX, scene.pointerY, function (mesh){
 	       
