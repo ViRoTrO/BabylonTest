@@ -7,7 +7,9 @@ var CheckCollisions = function(mesh)
 		{
 			var tempMesh = scene.meshes[i];
 			
-		    if(tempMesh != mesh && tempMesh.name != "ground" && tempMesh.name.search("wall") == -1)
+		    if(tempMesh != mesh && tempMesh.name != "ground" && 
+		    	tempMesh.name.search("wall") == -1 &&
+		    	tempMesh != mesh.parent && mesh != tempMesh.parent)
 		    {
 		    	if(mesh.intersectsMesh(tempMesh, false))
 		    	{

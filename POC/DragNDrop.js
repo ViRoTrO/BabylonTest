@@ -57,17 +57,23 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	    {
 	    	
 	    	var collMesh = CollisionDictionary[currentObject.uid][0];
-	    	if(collMesh && tag == "door" && collMesh.tag == "frame")
+	    	if(collMesh && tag == "door" && collMesh.tag == "frame") // door with frame
 	    	{
-	    		console.log(currentObject.scaling);
 	    		currentObject.parent = collMesh
 	    		isSnapped = true;
 	    		currentObject.scaling = new BABYLON.Vector3(1,1,1);
 	    		currentObject.locallyTranslate(new BABYLON.Vector3(5, 12, -270));
 	    		return;
 	    	}
-
-	    	
+	    	else if(collMesh && tag == "frame" && collMesh.tag == "frame") // frame with frame
+	    	{
+	    		console.log("Oho" + currentObject.uid);
+	    		currentObject.parent = collMesh
+	    		isSnapped = true;
+	    		currentObject.scaling = new BABYLON.Vector3(1,1,1);
+	    		currentObject.locallyTranslate(new BABYLON.Vector3(3, 380, 0));
+	    		return;
+	    	}	
 	    }
 
 	      var tempMesh;
