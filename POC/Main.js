@@ -19,11 +19,13 @@ camera.checkCollisions = true;
 
 // Show loading screen
 engine.displayLoadingUI();
-var test = new DragNDrop(-10,"model", "Assets/Models/", "FR11.babylon","Assets/Textures/FR11_A50247377.jpg", "frame");
+//var test = new DragNDrop(-10,"model", "Assets/Models/", "FR11.babylon","Assets/Textures/FR11_A50247377.jpg", "frame");
 var test = new DragNDrop(-5,"model", "Assets/Models/", "FR11.babylon","Assets/Textures/FR11_A70245848.jpg", "frame");
 
 var test2 = new DragNDrop(5,"DR08", "Assets/Models/", "DR08.babylon","Assets/Textures/DR08_00291674.jpg", "door");
-var test2 = new DragNDrop(10,"DR08", "Assets/Models/", "DR08.babylon","Assets/Textures/DR08_00291674.jpg", "door");
+//var test2 = new DragNDrop(10,"DR08", "Assets/Models/", "DR08.babylon","Assets/Textures/DR08_00291674.jpg", "door");
+
+//CreateBoundingBox();
 
 var groundSize = 60;
 var wallWidth = groundSize;
