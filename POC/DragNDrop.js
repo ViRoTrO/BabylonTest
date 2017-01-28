@@ -4,6 +4,10 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	var currentObjectSize;
 	var isSnapped = false;
 	var isDragging = false;
+
+	var lastValidPos;
+	var lastValidParent;
+	
 	// The first parameter can be used to specify which mesh to import. Here we import all meshes
 	BABYLON.SceneLoader.ImportMesh(model, path, modelFilename, scene, function (newMeshes) 
 	{
@@ -31,6 +35,7 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	    currentObject.outlineWidth = 10;
     	currentObject.outlineColor = BABYLON.Color3.Blue();
 	    
+	    lastValidPos = currentObject.position;
 	   
 	});
 
@@ -45,7 +50,7 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	    // if(pickResult.pickedPoint)
 	    //  {
 	    AddOutlineToMesh(currentObject);
-
+	    lastValidPos = currentObject.position;
 	    
 	    if(isSnapped)
 	    {
@@ -77,7 +82,8 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	    //console.log("Up " + currentObject.uid);
 	    camera.attachControl(canvas, false);  
 	    RemoveOutlineAll();
-	    //currentObject.disableEdgesRendering();
+	    lastValidPos = currentObject.position;
+	   
 	};
 
 	function onPointerMove() {
@@ -86,6 +92,7 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	    {
 	    	var validParent = findValidParent(currentObject);
 	    	validParent.onPointerMove();
+	    	lastValidParent = validParent;
 	    	return;
 	    }
 	     //console.log(currentObject.uid + " " + isDragging);
@@ -102,6 +109,7 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	    		isSnapped = true;
 	    		currentObject.scaling = new BABYLON.Vector3(1,1,1);
 	    		currentObject.locallyTranslate(new BABYLON.Vector3(5, 12, -270));
+	    		lastValidPos = currentObject.position;
 	    		return;
 	    	}
 	    	else if(collMesh && tag == "frame" && collMesh.tag == "frame") // frame with frame
@@ -110,8 +118,16 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	    		isSnapped = true;
 	    		currentObject.scaling = new BABYLON.Vector3(1,1,1);
 	    		currentObject.locallyTranslate(new BABYLON.Vector3(3, 380, 0));
+	    		lastValidPos = currentObject.position;
 	    		return;
-	    	}	
+	    	}
+	    	else if(collMesh && tag == "frame" && collMesh.tag == "door")
+	    	{
+	    		currentObject.position = lastValidPos;
+	    		collMesh.material.diffuseColor = new BABYLON.Color3(1, 0, 0); //Red
+	    		isDragging = false;
+	    	    return;		
+	    	}
 	    }
 
 	      var tempMesh;
@@ -134,14 +150,15 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	        {
 	            currentObject.position = pickResult.pickedPoint;
 	            checkWallFloor(pickResult.pickedMesh.name);
+
 	        }      
 	     }
+
 
 	     tempMesh = null;
 		
 		
 	};
-
 
 	function checkWallFloor(wallName)
 	{
@@ -209,7 +226,6 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 
 	
 }
-
 
 
 function findValidParent(childObj)

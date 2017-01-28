@@ -2,9 +2,9 @@ var canvas = document.getElementById("renderCanvas");
 var engine = new BABYLON.Engine(canvas, true);
 
 var scene = new BABYLON.Scene(engine);
-scene.collisionsEnabled = true;
+//scene.collisionsEnabled = true;
 //scene.debugLayer.show();
-
+scene.clearColor = new BABYLON.Color3(255, 255, 255);
 //Adding a light
 var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
 
@@ -19,17 +19,17 @@ camera.checkCollisions = true;
 
 // Show loading screen
 engine.displayLoadingUI();
-//var test = new DragNDrop(-10,"model", "Assets/Models/", "FR11.babylon","Assets/Textures/FR11_A50247377.jpg", "frame");
-var test = new DragNDrop(-5,"model", "Assets/Models/", "FR11.babylon","Assets/Textures/FR11_A70245848.jpg", "frame");
+var test = new DragNDrop(-10,"model", "Assets/Models/", "FR11.babylon","Assets/Textures/FR11_A50247377.jpg", "frame");
+var test = new DragNDrop(0,"model", "Assets/Models/", "FR11.babylon","Assets/Textures/FR11_A70245848.jpg", "frame");
 
-var test2 = new DragNDrop(5,"DR08", "Assets/Models/", "DR08.babylon","Assets/Textures/DR08_00291674.jpg", "door");
-//var test2 = new DragNDrop(10,"DR08", "Assets/Models/", "DR08.babylon","Assets/Textures/DR08_00291674.jpg", "door");
+var test2 = new DragNDrop(10,"DR08", "Assets/Models/", "DR08.babylon","Assets/Textures/DR08_00291674.jpg", "door");
+var test2 = new DragNDrop(20,"DR08", "Assets/Models/", "DR08.babylon","Assets/Textures/DR08_00291674.jpg", "door");
 
 //CreateBoundingBox();
 
 var groundSize = 60;
 var wallWidth = groundSize;
-var wallHeight = 20;
+var wallHeight = 30;
 
 camera.target = addGround(groundSize);
 addWalls(wallWidth,wallHeight);
@@ -56,7 +56,8 @@ function addGround(groundSize)
 {
     var ground = BABYLON.Mesh.CreateGround("ground", groundSize, groundSize, 2, scene);
     var materialGround = new BABYLON.StandardMaterial("groundMat", scene);
-    materialGround.diffuseTexture = new BABYLON.Texture("Assets/Textures/floorTexture2.jpg", scene);
+    // materialGround.diffuseTexture = new BABYLON.Texture("Assets/Textures/floorTexture2.jpg", scene);
+    materialGround.diffuseTexture = new BABYLON.Texture("Assets/poc/hardwood.png", scene);
     ground.material = materialGround;
     materialGround.specularColor = BABYLON.Color3.Black();
     materialGround.diffuseTexture.uScale = 5.0;
@@ -70,15 +71,27 @@ function addWalls(width,height)
     var wallCenter = BABYLON.MeshBuilder.CreatePlane("wallCenter", {width:width,height:height}, scene);
     var wallRight = BABYLON.MeshBuilder.CreatePlane("wallRight",{width:width,height:height} , scene);
 
-    var materialWall = new BABYLON.StandardMaterial("WallMat", scene);
-    materialWall.diffuseTexture = new BABYLON.Texture("Assets/Textures/wall4.jpg", scene);
-    materialWall.diffuseTexture.uScale = 10.0;
-    materialWall.diffuseTexture.vScale = 10.0;
+    var materialWallLeft = new BABYLON.StandardMaterial("WallMat", scene);
+    //materialWallLeft.diffuseTexture = new BABYLON.Texture("Assets/Textures/wall4.jpg", scene);
+    materialWallLeft.diffuseTexture = new BABYLON.Texture("Assets/poc/side_wall_left.png", scene);
+    //materialWallLeft.diffuseTexture.uScale = 10.0;
+    //materialWallLeft.diffuseTexture.vScale = 10.0;
 
+    var materialWallCenter = new BABYLON.StandardMaterial("WallMat", scene);
+    //materialWallCenter.diffuseTexture = new BABYLON.Texture("Assets/Textures/wall4.jpg", scene);
+    materialWallCenter.diffuseTexture = new BABYLON.Texture("Assets/poc/center_wall.png", scene);
+    //materialWallCenter.diffuseTexture.uScale = 10.0;
+    //materialWallCenter.diffuseTexture.vScale = 10.0;
 
-    wallLeft.material = materialWall;
-    wallCenter.material = materialWall;
-    wallRight.material = materialWall;
+    var materialWallRight = new BABYLON.StandardMaterial("WallMat", scene);
+    //materialWallRight.diffuseTexture = new BABYLON.Texture("Assets/Textures/wall4.jpg", scene);
+    materialWallRight.diffuseTexture = new BABYLON.Texture("Assets/poc/side_wall_right.png", scene);
+    //materialWallRight.diffuseTexture.uScale = 10.0;
+    //materialWallRight.diffuseTexture.vScale = 10.0;
+
+    wallLeft.material = materialWallLeft;
+    wallCenter.material = materialWallCenter;
+    wallRight.material = materialWallRight;
 
    
     // Positions
