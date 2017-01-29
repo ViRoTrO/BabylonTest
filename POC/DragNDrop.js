@@ -20,6 +20,7 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	    currentObject.rotation.y = 0;
 	    var materialBox = new BABYLON.StandardMaterial("frameMat", scene);
 	    materialBox.diffuseTexture = new BABYLON.Texture(texturePath, scene);
+	    materialBox.specularColor = BABYLON.Color3.Black();
 	    currentObject.material = materialBox;
 	    currentObject.position.y = 2;
 	    currentObject.position.x = pos;
@@ -36,7 +37,13 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
     	currentObject.outlineColor = BABYLON.Color3.Blue();
 	    
 	    lastValidPos = currentObject.position;
-	   
+	   	
+	   	if(tag == "frame")
+	   		currentObject.snapArray = new SnapPoints().frameSnaps;
+	   	else if(tag == "door")
+	   		currentObject.snapArray = [];
+
+	   	//console.log(currentObject.snapArray);
 	});
 
 	
@@ -105,11 +112,25 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	    	var collMesh = CollisionDictionary[currentObject.uid][0];
 	    	if(collMesh && tag == "door" && collMesh.tag == "frame") // door with frame
 	    	{
-	    		currentObject.parent = collMesh
-	    		isSnapped = true;
-	    		currentObject.scaling = new BABYLON.Vector3(1,1,1);
-	    		currentObject.locallyTranslate(new BABYLON.Vector3(5, 12, -270));
-	    		lastValidPos = currentObject.position;
+	    		var closestSnap = findClosestSnap(currentObject.position,"door",collMesh.snapArray);
+
+	    		console.log(collMesh.uid + ":" +collMesh.snapArray);
+
+	    		if(closestSnap)
+	    		{
+	    			closestSnap.isSnapped = true;
+	    			currentObject.parent = collMesh
+		    		isSnapped = true;
+		    		currentObject.scaling = new BABYLON.Vector3(1,1,1);
+		    		currentObject.locallyTranslate(new BABYLON.Vector3(5, 12, -270));
+		    		lastValidPos = currentObject.position;
+	    		}
+	    		else
+	    		{
+	    			showCollision(collMesh);
+	    		}
+
+	    		
 	    		return;
 	    	}
 	    	else if(collMesh && tag == "frame" && collMesh.tag == "frame") // frame with frame
@@ -123,9 +144,7 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	    	}
 	    	else if(collMesh && tag == "frame" && collMesh.tag == "door")
 	    	{
-	    		currentObject.position = lastValidPos;
-	    		collMesh.material.diffuseColor = new BABYLON.Color3(1, 0, 0); //Red
-	    		isDragging = false;
+	    		showCollision(collMesh);
 	    	    return;		
 	    	}
 	    }
@@ -134,15 +153,13 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	     // We try to pick an object
 	     var pickResult = scene.pick(scene.pointerX, scene.pointerY, function (mesh){
 	       
-	       if(mesh.name == "ground" || mesh.name.search("wall") != -1)
+	       if(currentObject != mesh && currentObject != mesh.parent && mesh != currentObject.parent)
 	       {
 	            tempMesh = mesh;
 	            return mesh;
-	       }
-	            
+	       }    
 	     });
-	     
-	     
+	     	     
 	     if(pickResult.pickedPoint)
 	     {
 	        
@@ -159,6 +176,13 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 		
 		
 	};
+
+	function showCollision(collMesh)
+	{
+		currentObject.position = lastValidPos;
+	    collMesh.material.diffuseColor = new BABYLON.Color3(1, 0, 0); //Red
+	    isDragging = false;
+	}
 
 	function checkWallFloor(wallName)
 	{

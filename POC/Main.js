@@ -60,6 +60,7 @@ function addGround(groundSize)
     materialGround.diffuseTexture = new BABYLON.Texture("Assets/poc/hardwood.png", scene);
     ground.material = materialGround;
     materialGround.specularColor = BABYLON.Color3.Black();
+    materialGround.emissiveColor = BABYLON.Color3.White();
     materialGround.diffuseTexture.uScale = 5.0;
     materialGround.diffuseTexture.vScale = 5.0;
     return ground;
@@ -76,22 +77,29 @@ function addWalls(width,height)
     materialWallLeft.diffuseTexture = new BABYLON.Texture("Assets/poc/side_wall_left.png", scene);
     //materialWallLeft.diffuseTexture.uScale = 10.0;
     //materialWallLeft.diffuseTexture.vScale = 10.0;
+    materialWallLeft.specularColor = BABYLON.Color3.Black();
+    materialWallLeft.emissiveColor = BABYLON.Color3.White();
+
 
     var materialWallCenter = new BABYLON.StandardMaterial("WallMat", scene);
     //materialWallCenter.diffuseTexture = new BABYLON.Texture("Assets/Textures/wall4.jpg", scene);
     materialWallCenter.diffuseTexture = new BABYLON.Texture("Assets/poc/center_wall.png", scene);
     //materialWallCenter.diffuseTexture.uScale = 10.0;
     //materialWallCenter.diffuseTexture.vScale = 10.0;
+    materialWallCenter.specularColor = BABYLON.Color3.Black();
+    materialWallCenter.emissiveColor = BABYLON.Color3.White();
 
     var materialWallRight = new BABYLON.StandardMaterial("WallMat", scene);
     //materialWallRight.diffuseTexture = new BABYLON.Texture("Assets/Textures/wall4.jpg", scene);
     materialWallRight.diffuseTexture = new BABYLON.Texture("Assets/poc/side_wall_right.png", scene);
     //materialWallRight.diffuseTexture.uScale = 10.0;
     //materialWallRight.diffuseTexture.vScale = 10.0;
+    materialWallRight.specularColor = BABYLON.Color3.Black();
+    materialWallRight.emissiveColor = BABYLON.Color3.White();
 
     wallLeft.material = materialWallLeft;
     wallCenter.material = materialWallCenter;
-    wallRight.material = materialWallRight;
+    wallRight.material = materialWallRight; 
 
    
     // Positions
