@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+<revision>@REVISION_YYYYMMDD@</revision>
+<colors>
+	<color id="white" iconname="white.png" name="COLOR_WHITE_TEXT" sortorder="45"/>
+</colors>
+<plannerModels>
+<model id="FR18" family="frame" type="frame_wall" iows="false" size="600,389,200" showinmenu="false" />
+<model id="FR18_SPR" family="frame_spr" type="frame_wall" hasmodel="false" size="600,380,200" />
+<model id="SHLF02" family="interior" type="shelf" size="560,20,160" />
+<model id="DR01" family="door" type="door_hinged" size="600,380,20" />
+</plannerModels>
+<plannerProducts>
+<product id="A00245917" model="FR18" color="white" showinmenu="false" alias="80245918,90299331"><thumbs><thumb id="1" type="thumbImgUrl" source="00245917_110.JPG" /></thumbs></product>
+<product id="00245917" iowsid="00245917" model="FR18_SPR" color="white" alias="80245918,90299331"><products><product pId="A00245917" qty="1" /><product pId="D90182492" qty="1" /></products><thumbs><thumb id="1" type="thumbImgUrl" source="00245917.JPG" /></thumbs></product>
+<product id="40295552" model="SHLF02" color="white" alias="20295553,30299471"><thumbs><thumb id="1" type="thumbImgUrl" source="40295552.jpg" /></thumbs></product>
+<product id="20291630" model="DR01" color="high_gloss_white" alias="00291631"><thumbs><thumb id="1" type="thumbImgUrl" source="20291630_110.JPG" /></thumbs></product>
+</plannerProducts>
+</root>

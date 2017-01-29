@@ -1,48 +1,571 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <head>
+      <title>Besta</title>
+      <link href="css/bootstrap.css" rel="stylesheet" />
+      <link rel="stylesheet" href="css/swiper.min.css">
+      <!--<link href="css/besta.css" rel="stylesheet" />-->
+	  
+	  <meta charset="utf-8">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
+	  
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="css/besta.css" rel="stylesheet" />
+	
+   </head>
+   <body>
+	   <style type="text/css">
+   
+   @media (min-width: 768px){
+.navbar-nav {
+    float: right;}
+   
+  }
+   
+   @media (max-width: 767px) {
+   
+   .navbar-brand {
+    float: right !important;
+	
+	}
+   
+   a#dlog.Login{
+   display:none !important;
+   }
+   
+   li#mlog{
+   display:block !important;
+   }
+   .navbar .navbar-collapse{
+   
+   text-align: left;
+    background: #ced0d4;
+    opacity: 0.9;
+    position: absolute;
+    width: 100%;
+	}
+	
+	.navbar-inverse .navbar-toggle .icon-bar{
+	background-color:#000000 !important;
+	
+	
+	.navbar-inverse .navbar-nav > li > a {
+    border-right: 1px solid;
+    padding: 0px 20px 3px;
+    font-size: 12px;
+    font-weight: lighter;
+    margin-top: 2px;
+    color: #222;
+    font-family: verdana;
+}
 
-    <title>Babylon.js sample code</title>
-    <!-- Babylon.js -->
+.navbar-inverse .navbar-brand {
+    color: #9d9d9d;
+    float: right;
 
-    <!-- Local -->
-    <!-- <script src="http://www.babylonjs.com/hand.minified-1.2.js"></script>
-    <script src="http://www.babylonjs.com/babylon.js"></script> -->
+}
 
-    <!-- Server -->
-    <!-- <script src="//www.babylonjs.com/hand.minified-1.2.js"></script>
-    <script src="//www.babylonjs.com/babylon.js"></script> -->
+.swiper-slide {
+border: 0px !important;
+}
+}
+	</style>
+	
+	  <script type="text/javascript">
+		function itmsdisp(){
+		document.querySelector(".tab-content").style.display = "block";
+		}
+	  </script> 
+      <script type="text/template" class="swiper">
 
-    <script src="api/hand.js"></script>
-    <script src="api/canon.js"></script>
-    <script src="api/babylon.2.5.noworker.js"></script>
-    
+          <%
+            // repeat items 
+            _.each(rc.data, function(v,key,arr){
+          %>	  
+		  
+            <div class="swiper-slide">
+              <a href="#" class="add-item"  model-name= "<%= v.name %>" model-url= "<%= v.model %>" model-type= "<%= v.type %>">
+                <img src="<%= v.image %>" alt="" class="img-responsive">
+                <div style="font-size: 8px;color: #222;font-weight: 600;"><%= v.name %></div>
+              </a>
+            </div>
 
-    <style>
-        html, body {
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
+          <%
+            });
+          %>
+
+      </script>
+
+      <div class="container-fluid main-wrapper">
+		<div class="container-fluid scroll-wrapper" style="padding: 0;">
+         <!-- Navigation -->
+         
+           <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div style="max-width: 1060px;margin-left: 20px;">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="col-xs-7 col-sm-10">
+                <div class="navbar-header">
+				   
+                   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" style="float:left;height:30px; background-color:#fffff;">
+					   <span class="sr-only">Toggle navigation</span>
+					   <span class="icon-bar"></span>
+					   <span class="icon-bar"></span>
+					   <span class="icon-bar"></span>
+                   </button>
+			<a class="navbar-brand" href="https://bestaplanner.github.io">
+					<img src="images/logo.png" class="img-responsive">
+                   </a>
+                </div>
+             
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div id="bs-example-navbar-collapse-1" class = "collapse navbar-collapse">
+                   <ul class="nav navbar-nav">
+                      <li>
+                         <a href="#" class="active" id="new">New</a>
+                      </li>
+                      <li>
+                         <a class="btn-file">
+						   <input type="file" class="hidden-input" id="loadFile" />
+						   Open
+						  </a>
+                      </li>
+                      <li>
+                         <a href="#" id="saveFile">Save</a>
+                      </li>
+                    <!--  <li>
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true" >Share</a>
+						<ul role="menu" class="dropdown-menu share">
+							<li class="p_int"><a><img src="images/pinterest_grey.png" onmouseover="this.src='images/pinterest_on.png'" onmouseout="this.src='images/pinterest_grey.png'"/></a></li>
+							<li class="fb"><a><img src="images/facebook_grey.png" onmouseover="this.src='images/facebook_on.png'" onmouseout="this.src='images/facebook_grey.png'"/></a></li>
+							<li class="twit"><a href="#"><img src="images/twitter_grey.png" onmouseover="this.src='images/twitter_on.png'" onmouseout="this.src='images/twitter_grey.png'"/></a></li>
+							<li class="g_s"><a href="#"><img src="images/google_grey.png" onmouseover="this.src='images/google_on.png'" onmouseout="this.src='images/google_grey.png'"/></a></li>
+							<li class="email"><a href="#"><img src="images/email_grey.png" onmouseover="this.src='images/email_on.png'" onmouseout="this.src='images/email_grey.png'"/></a></li>
+						</ul>
+                      </li>-->
+                      <li>
+                         <a href="#">Help</a>
+                      </li>
+                      <li>
+                         <a href="#">Print</a>
+                      </li>
+			   <li id="mlog" style="display: none;"><a href="#" class="Login">Login</a></li>
+                   </ul>
+                </div>
+              </div>
+              <div class="col-xs-5 col-sm-2 ">
+                <div class="pull-right mR10">
+				<div id="cartmob" style="display:none;">
+				<div class="shopCart"><span class="glyphicon glyphicon-shopping-cart" style="float:left; margin-right:10%"></span><sup><span class="totalBG1">2</span></sup><label class="redTxt">$60.00</label></div>
+                <div class="col-md-1 closeX"><span class="glyphicon glyphicon-triangle-top"></span></div>	</div> 
+                  <a href="#" id="dlog" class="Login hidden-xs hidden-sm">LOGIN</a>
+                </div>
+              </div>
+              <!-- /.navbar-collapse -->
+              </div>
+           </nav>
+		   
+		   
+          <!--<div class="main-row mT55"  style="/*display: table;*/width: 100%;padding: 0;">-->
+            <!-- Left Column -->
+            <div class="col-xs-12 col-sm-9 main" style="padding: 0 10px;">
+               <!-- 3D Viewer -->
+               <div id="viewer" style="display: block;border: 1px solid gainsboro;position: relative;">
+                  <!-- Popover-->
+                  <div class="pull-right">
+                     <div class="tabbable" id="popoverContent2">
+						<div style="display:block;" id="tabContent">
+                        <div style="display:inline-block;width: 100%;margin-bottom: 5px;">
+                           <div class="input-group pull-left width35" style="position:relative;">
+                              <input id="email" type="text" class="form-control" name="email" placeholder="Search or article no">
+                              <span class="input-group-addon" style="background: transparent;border: none;position: absolute;right: 5px;top: -1px;"><i class="glyphicon glyphicon-search"></i></span>   
+                           </div>
+                           <div class="pull-right"><font face="verdana" color="green">Add Product > </font><font face="verdana"><b> Storage Frames </b></font></div>
+                        </div>
+                        <ul class="nav nav-tabs" onclick="itmsdisp();">
+                           <li class="active"><a href=".tab1" data-toggle="tab" data-item="storage frame"><img src="images/storage_frame.png" width="25px" height="25px"> Storage Frames</a></li>
+                           <li class="tab"><a href=".tab1" data-toggle="tab" data-item="tv bench"><img src="images/tv_benches.png" width="25px" height="25px"> TV Benches </a></li>
+                           <li class="tab"><a href=".tab1" data-toggle="tab" data-item="propping"><img src="images/propping.png" width="25px" height="25px"> Propping </a></li>
+                           <li class="tab"><a href=".tab1" data-toggle="tab" data-item="placeholder"><img src="images/placeholder.png" width="25px" height="25px"> Place Holder </a></li>
+                        </ul>
+                        <div class="tab-content" style="padding: 10px; ">
+                           <div class="tab-pane active tab1" >
+                              <div class="DD" style="display:inline-block">
+                                 <div class="dropdown dInline">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Width
+                                    <span class="caret"></span></button>
+                                    <ul class="dropdown-menu ">
+                                       <li><a href="#">option 1</a></li>
+                                       <li><a href="#">option 2</a></li>
+                                       <li><a href="#">option 3</a></li>
+                                    </ul>
+                                 </div>
+                                 <div class="dropdown dInline">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Height
+                                    <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                       <li><a href="#">option 1</a></li>
+                                       <li><a href="#">option 2</a></li>
+                                       <li><a href="#">option 3</a></li>
+                                    </ul>
+                                 </div>
+                                 <div class="dropdown dInline">									
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Depth
+                                    <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                       <li><a href="#">option 1</a></li>
+                                       <li><a href="#">option 2</a></li>
+                                       <li><a href="#">option 3</a></li>
+                                    </ul>
+                                 </div>
+                              </div>
+							  
+							  <div class="pull-right" id="crlrd" style="width:55%">
+									<div class="colors" id="clrrd1" style="font-family:Verdana;font-size:14px;">Colors<br>
+									<div class="blackCircle pull-left">&nbsp;</div>
+									<div class="greyCircle pull-left">&nbsp;</div>
+									<div class="brownCircle pull-left">&nbsp;</div>
+							  </div>
+						
+						<div class="pull-right" id="clrfltr" style="width:35%;font-family: Verdana;"> <a href="#">Clear Filters</a></div>
+						</div>
+                              <div id="swpr" style="position:relative;padding:0 50px;">
+                                <div class="swiper-container" id="swiper">
+                                    <div class="swiper-wrapper"></div>
+                                </div>
+                                <!-- Add Arrows -->
+                                <div class="swiper-button-next">
+                                  <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                                </div>
+                                <div class="swiper-button-prev">
+                                  <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                                </div>
+                              </div>
+                           </div>
+                           <div class="tab-pane tab2">Tab Content 2</div>
+                           <div class="tab-pane tab3" >Tab Content 3</div>
+                        </div>
+						</div>
+						
+						<!-- Change Color -->
+						<div style="display:none;" id="textureContent">
+							<div style="display:inline-block;width: 100%;margin-bottom: 5px;">
+			                           <div class="input-group pull-left width35" style="position:relative;">
+			                              <b>Besta Frame White</b><br> 60*20*38 cm</div>
+			                           <div class="pull-right"><a href="#"> < Back </a></div>
+			                        </div>
+			                       
+								   <div class="tab-content" style="display:inline-block; width:100%; padding:10px;">
+			                         <div class="" style="width:100%; display:inline-block">
+										   
+						
+						</div>
+							<div style="position:relative;padding:0 50px; margin-top:10px;">
+								<div class="col-sm-2">
+									<a href="#" class="thumbnail texture-select-thumbnail" model-name="models/js/blackBrown.js">
+										<img alt="Thumbnail light fine wood" src="rooms/thumbnails/black.png" />
+									</a>
+								</div>
+								<div class="col-sm-2" >
+									<a href="#" class="thumbnail texture-select-thumbnail" model-name="models/js/60x20x38.js">
+										<img alt="Thumbnail light fine wood" src="rooms/thumbnails/oak.png" />
+									</a>
+								</div>
+								<div class="col-sm-2">
+									<a href="#" class="thumbnail texture-select-thumbnail" model-name="models/js/60x20x38.js">
+										<img alt="Thumbnail light fine wood" src="rooms/thumbnails/white_stained_oak_effect.png" />
+									</a>
+								</div>	
+								<div class="col-sm-2">
+									<a href="#" class="thumbnail texture-select-thumbnail" model-name="models/js/GreyStained.js">
+										<img alt="Thumbnail light fine wood" src="rooms/thumbnails/grey_stained_walnut_effect.png" />
+									</a>
+								</div>
+								<div class="col-sm-2">
+									<a href="#" class="thumbnail texture-select-thumbnail" model-name="models/js/white.js">
+										<img alt="Thumbnail light fine wood" src="rooms/thumbnails/white.png" />
+									</a>
+								</div>
+			       </div>
+						</div>
+						</div>
+                     </div>
+					 <div>
+						<a class="btn1" id="btnPopover" href="#"><img title="Add Product" onmouseover="this.src='images/add_product_hover.png'" src="images/add_product.png"  onmouseout="this.src='images/add_product.png'" /></a>
+						<a class="btn2" id="btnWallover" href="#"><img title="Customize Room" onmouseover="this.src='images/room_layout_hover.png'" src="images/room_layout.png"  onmouseout="this.src='images/room_layout.png'" /></a>				                    
+                     </div>
+					 <div id="camera-controls">
+						 <a href="#" class="" id="undo-view">
+							<img title="undo" onmouseover="this.src='images/undo_b_hover.png'" src="images/undo.png"  onmouseout="this.src='images/undo.png'" />
+                        </a>
+						 <a href="#" class="" id="redo-view">
+							<img title="redo" onmouseover="this.src='images/redo_b_hover.png'" src="images/redo.png"  onmouseout="this.src='images/redo.png'" />
+                        </a>
+						 <a href="#" class="" id="reset-view">
+							<img title="reset" onmouseover="this.src='images/center_b_hover.png'" src="images/center.png"  onmouseout="this.src='images/center.png'" />
+                        </a>
+						<a href="#" class="" id="zoom-in">
+							<img title="zoom-in" src="images/zoom_in.png" onmouseover="this.src='images/zoom_in_b_hover.png'" onmouseout="this.src='images/zoom_in.png'"/>
+                        </a>
+                        <a href="#" id="zoom-out">
+							<img title="zoom-out" src="images/zoom_out.png" onmouseover="this.src='images/zoom_out_b_hover.png'" onmouseout="this.src='images/zoom_out.png'"/>
+                        </a>
+                        
+                        <a  href="#" id="move-left" >
+							<img title="move-left" src="images/panupdown.png" onmouseover="this.src='images/panupdown_b_hover.png'" onmouseout="this.src='images/panupdown.png'"/>
+                        </a>
+						<a  href="#" id="move-right" >
+							<img title="move-right" src="images/3dview.png" onmouseover="this.src='images/3dview_b_hover.png'" onmouseout="this.src='images/3dview.png'"/>
+                        </a>
+                        <a href="#" id="measure-tap" >
+                         <img title="scale" src="images/measurement.png" onmouseover="this.src='images/measurement_b_hover.png'" onmouseout="this.src='images/measurement.png'"/>
+                        </a>
+						<a href="#" id="full-screen" >
+                         <img title="full-screen" src="images/fullscreen.png" onmouseover="this.src='images/fullscreen_b_hover.png'" onmouseout="this.src='images/fullscreen.png'"/>
+                        </a>
+						<a href="#" id="threed" >
+                         <img title="2D" src="images/2d.png" onmouseover="this.src='images/2d_hover.png'" onmouseout="this.src='images/2d.png'"/>
+                        </a>
+						<a href="#"><img title="Pinterest" src="images/pinterest_grey.png" onmouseover="this.src='images/pinterest_on.png'" onmouseout="this.src='images/pinterest_grey.png'"/></a>
+						<a href="#"><img title="Facebook" src="images/facebook_grey.png" onmouseover="this.src='images/facebook_on.png'" onmouseout="this.src='images/facebook_grey.png'"/></a>
+						<a href="#"><img title="Twitter" src="images/twitter_grey.png" onmouseover="this.src='images/twitter_on.png'" onmouseout="this.src='images/twitter_grey.png'"/></a>
+						<a href="#"><img title="Google+" src="images/google_grey.png" onmouseover="this.src='images/google_on.png'" onmouseout="this.src='images/google_grey.png'"/></a>
+						<a href="#"><img title="Email" src="images/email_grey.png" onmouseover="this.src='images/email_on.png'" onmouseout="this.src='images/email_grey.png'"/></a>
+                     </div>
+												
+					
+					 <!-- -->
+					 <div id="object-controls" style="display:none;">
+						 <a href="#" class="" id="change-texture">
+							<img onmouseover="this.src='images/style_hover.png'" src="images/style.png"  onmouseout="this.src='images/style.png'" />
+                        </a>
+						 <a href="#" class="" id="clone-texture">
+							<img onmouseover="this.src='images/duplicate_hover.png'" src="images/duplicate.png"  onmouseout="this.src='images/duplicate.png'" />
+                        </a>
+						 <a href="#" class="" id="trash">
+							<img onmouseover="this.src='images/delete_hover.png'" src="images/delete.png"  onmouseout="this.src='images/delete.png'" />
+                        </a>
+						<a href="#" class="" id="plus">
+							<img onmouseover="this.src='images/plus_hover.png'" src="images/plus.png"  onmouseout="this.src='images/plus.png'" />
+                        </a>
+                     </div>
+					 
+                     <!-- <div id="loading-modal">
+                        <h1>Loading...</h1>
+                     </div> -->
+                  </div>
+                  <canvas id="renderCanvas" 
+                  style="width: 100%; height: 100%;touch-action: none;"></canvas>
+                  <!-- 2D Floorplanner -->
+                  <div id="floorplanner">
+                     
+                     <div id="floorplanner-controls">
+                        <button id="move" class="btn btn-sm btn-default">
+                        <span class="glyphicon glyphicon-move"></span>
+                        Move Walls
+                        </button>
+                        <button id="draw" class="btn btn-sm btn-default">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        Draw Walls
+                        </button>
+                        <button id="delete" class="btn btn-sm btn-default">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        Delete Walls
+                        </button>
+                        <span class="pull-right">
+                        <button class="btn btn-primary btn-sm" id="update-floorplan">Done &raquo;</button>
+                        </span>
+                     </div>
+                     <div id="draw-walls-hint">
+                        Press the "Esc" key to stop drawing walls
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- End Right Column -->
+            <!-- Right Column -->
+            <div class="col-xs-3 sidebar height100p">
+              <div class="row" style="height: 30px;background: gainsboro;padding: 0;">
+			 
+                <div class="shopCart"><span class="glyphicon glyphicon-shopping-cart" style="float:left; margin-right:10%"></span><span class="totalBG1">2</span></div>
+                <div class="cartTxt">items in your cart</div>
+                <div class="col-md-2 price cartTxt"><label class="redTxt">$60.00</label></div>
+                <div class="col-md-1 closeX"><span class="glyphicon glyphicon-triangle-top"></span></div>	
+              
+			  </div>
+
+              <ul id="cart-items">
+                <li>
+                  <div class="col-sm-2" style="padding:0;"><img src="images/60x20x38cm.JPG" width="55px"></div>
+                  <div class="col-sm-6">
+                    <div style="font-size:11px;font-weight:600;">BestA frame white</div>
+                    <div style="font-size:10px;color:gray;">60x20x38 cm</div>
+                    <div style="font-size:10px;">Qty: 1</div>
+                  </div>
+                  <div class="col-sm-3"><div  style="font-size:11px;font-weight:600;">$30.00</div></div>
+                </li>
+                <li>
+                  <div class="col-sm-2" style="padding:0;"><img src="images/60x20x38cm.JPG" width="55px"></div>
+                  <div class="col-sm-6">
+                    <div style="font-size:11px;font-weight:600;">BestA frame white</div>
+                    <div style="font-size:10px;color:gray;">60x20x38 cm</div>
+                    <div style="font-size:10px;">Qty: 1</div>
+                  </div>
+                  <div class="col-sm-3"><div  style="font-size:11px;font-weight:600;">$30.00</div></div>
+                </li>
+
+              </ul>
+              <!--
+               <p><b>Products Added</b> <span><input type="text" size="1"></span></p>
+               <table class="table-fill">
+                  <thead>
+                     <tr>
+                        <th class="text-left">Qty</th>
+                        <th class="text-left">Item</th>
+                        <th class="text-left">Price</th>
+                     </tr>
+                  </thead>
+                  <tbody class="table-hover">
+                     <tr>
+                        <td class="text-left">1</td>
+                        <td class="text-left"> <img src="images/60x20x38cm.JPG" width="55px"></td>
+                        <td class="text-left">10</td>
+                     </tr>
+                     <tr>
+                        <td class="text-left">2</td>
+                        <td class="text-left"> <img src="images/black brwon.JPG" width="55px"></td>
+                        <td class="text-left">10</td>
+                     </tr>
+                     <tr>
+                        <td class="text-left">3</td>
+                        <td class="text-left"> <img src="images/FR18.JPG" width="55px"></td>
+                        <td class="text-left">10</td>
+                     </tr>
+                  </tbody>
+               </table>
+
+               -->
+               <!--div class="pull-right">
+                  <div class="totalBG"><b>Total: 30</b></div>
+                  <button name="color" type="button" class="btn btn-success" value="btn-success">Continue <span class="glyphicon glyphicon-triangle-right"></button>
+               </div-->
+
+               <div style="padding:0 10px;">
+                <button name="color" type="button" class="btn" value="btn-success" style="
+                    background: #0051ba;
+                    color: #fff;
+                    width: 100%;
+                    padding: 10px;
+                    border-radius: 0;
+                ">Continue </button>
+               </div>
+
+
+
+            </div>
+         </div>
+		 <!--</div>-->
+      </div>
+      <!-- <script type="text/javascript" src="js/three.min.js"></script> -->
+      <!-- <script type="text/javascript"  src="js/compiled.js"></script> -->
+      
+      <script type="text/javascript"  src="js/bootstrap.js"></script>
+      <script  type="text/javascript" src="js/items.js"></script>
+      <script  type="text/javascript" src="js/main.js"></script>
+      <script type="text/javascript"  src="js/swiper.min.js"></script>
+      <script type="text/javascript"  src="js/underscore-min.js"></script>
+
+      <script src="api/hand.js"></script>
+      <script src="api/canon.js"></script>
+      <script src="api/babylon.2.5.noworker.js"></script>
+
+      <script src="POC/Global.js"></script>
+      <script src="POC/DragNDrop.js"></script>
+      <script src="POC/CheckCollisions.js"></script> 
+      <script src="POC/BoundingBox.js"></script> 
+      <script src="POC/Main.js"></script>
+
+
+      <script>
+
+        var organizedItems = {};
+        var swiper;
+        var defaultItem = $("#popoverContent2 .nav-tabs li.active").find("a");
+
+        $.each(items, function(k,v){
+            if(v.modeltype){
+                if(!organizedItems[v.modeltype]){
+                  organizedItems[v.modeltype] = [];
+                }
+                organizedItems[v.modeltype].push(v);
+            }
+        });
+
+        function initSwiper(){
+          if(swiper !== undefined) swiper.destroy(true, true);
+          if($(window).width() < 1024){
+  
+
+          swiper = new Swiper('.swiper-container', {
+              //pagination: '.swiper-pagination',
+              slidesPerView:3,
+              slidesPerGroup: 3,
+              initialSlide: 0,
+              //paginationClickable: true,
+              spaceBetween: 15,
+              nextButton: '.swiper-button-next',
+              prevButton: '.swiper-button-prev'
+          });}
+		  
+		  else {         
+	swiper = new Swiper('.swiper-container', {
+              //pagination: '.swiper-pagination',
+              slidesPerView:6,
+              slidesPerGroup: 6,
+              initialSlide: 0,
+              //paginationClickable: true,
+              spaceBetween: 15,
+              nextButton: '.swiper-button-next',
+              prevButton: '.swiper-button-prev'
+          });}
+		
+        }
+		
+		
+
+        function createTemplate(tpl, renderWrapper, data){
+            _.templateSettings.variable = "rc";
+            var template = _.template(
+                $( tpl ).html()
+            );
+            $( renderWrapper ).html(
+                template({"data":data})
+            );
         }
 
-        #renderCanvas {
-            width: 100%;
-            height: 100%;
-            touch-action: none;
-        }
-    </style>
-</head>
-<body>
-    <canvas id="renderCanvas"></canvas>
+        createTemplate("script.swiper", "#swiper .swiper-wrapper", organizedItems[defaultItem.data("item")]);
 
-    <script src="POC/Global.js"></script>
-    <script src="POC/DragNDrop.js"></script>
-    <script src="POC/CheckCollisions.js"></script> 
-    <script src="POC/BoundingBox.js"></script> 
-    <script src="POC/Main.js"></script> 
-    
-</body>
+        $('a[data-toggle="tab"]').click(function(){
+          var modeltype = $(this).data('item');
+          createTemplate("script.swiper", "#swiper .swiper-wrapper", organizedItems[modeltype]);
+          initSwiper();
+        });
+
+        $("#btnPopover").on("click", function(){
+          $("#popoverContent2").toggle();
+          initSwiper();
+        });
+		
+		
+
+      </script>
+    <script>
+
+    </script>
+   </body>
 </html>

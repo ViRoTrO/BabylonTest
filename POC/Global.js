@@ -35,10 +35,8 @@ var SnapPoints = function(){
 
 		frameSnaps:[
 			addSnaps("frame", new BABYLON.Vector3(5, 12, -270), false, "door"),
-
-			addSnaps("frame", new BABYLON.Vector3(-5, 380, 0), false, "frame"),
-			addSnaps("frame", new BABYLON.Vector3(-5, 380, 0), false, "frame"),
-			addSnaps("frame", new BABYLON.Vector3(-5, 380, 0), false, "frame")
+			addSnaps("frame", new BABYLON.Vector3(10, 380, 0), false, "frame"),
+			
 		]
 	}
 

@@ -19,11 +19,29 @@ camera.checkCollisions = true;
 
 // Show loading screen
 engine.displayLoadingUI();
-var test = new DragNDrop(-10,"model", "Assets/Models/", "FR11.babylon","Assets/Textures/FR11_A50247377.jpg", "frame");
-var test = new DragNDrop(0,"model", "Assets/Models/", "FR11.babylon","Assets/Textures/FR11_A70245848.jpg", "frame");
 
-var test2 = new DragNDrop(10,"DR08", "Assets/Models/", "DR08.babylon","Assets/Textures/DR08_00291674.jpg", "door");
-var test2 = new DragNDrop(20,"DR08", "Assets/Models/", "DR08.babylon","Assets/Textures/DR08_00291674.jpg", "door");
+
+var muliplier = 0;
+
+for (var i = 1; i < 4; i++) {
+
+    new DragNDrop(new BABYLON.Vector3(-15,2,muliplier),"model", "Assets/Models/", "FR11.babylon","Assets/Textures/FR11_A50247377.jpg", "frame");
+    new DragNDrop(new BABYLON.Vector3(-5,2,muliplier),"model", "Assets/Models/", "FR11.babylon","Assets/Textures/FR11_A70245848.jpg", "frame");
+    
+    new DragNDrop(new BABYLON.Vector3(5,2,muliplier),"DR08", "Assets/Models/", "DR08.babylon","Assets/Textures/DR08_00291674.jpg", "door");
+    new DragNDrop(new BABYLON.Vector3(15,2,muliplier),"DR08", "Assets/Models/", "DR08.babylon","Assets/Textures/DR08_90291684.jpg", "door");
+
+    muliplier += 10;
+
+}
+
+// Frames
+// var test = new DragNDrop(new BABYLON.Vector3(10),"model", "Assets/Models/", "FR11.babylon","Assets/Textures/FR11_A50247377.jpg", "frame");
+// var test = new DragNDrop(0,"model", "Assets/Models/", "FR11.babylon","Assets/Textures/FR11_A70245848.jpg", "frame");
+
+// // Door
+// var test2 = new DragNDrop(10,"DR08", "Assets/Models/", "DR08.babylon","Assets/Textures/DR08_00291674.jpg", "door");
+// var test2 = new DragNDrop(20,"DR08", "Assets/Models/", "DR08.babylon","Assets/Textures/DR08_00291674.jpg", "door");
 
 //CreateBoundingBox();
 

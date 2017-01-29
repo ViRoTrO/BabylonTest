@@ -1,0 +1,63 @@
+<definition_data version="2" time="06/01/16 03:56:39 PM">
+  <revision>@REVISION_YYYYMMDD@</revision>
+  <plannerFilters>
+  </plannerFilters>
+  <plannerModels>
+	<model id="FR18" pkg="true"/>
+	<model id="DR01"/>
+	<model id="SHLF02"/> 
+  </plannerModels>
+  <plannerProducts>
+	<product id="20291630" modelId="DR01">
+      <parts>
+        <part id="0" shader="highGloss"/>
+      </parts>
+    </product>
+	 <product id="A00245917" modelId="FR18"/>
+	 <product id="40295552" modelId="SHLF02"/>
+  </plannerProducts>
+  <plannerLogics>
+	 <logic id="FR18">
+      <bounds>
+        <bound id="bound" mtx="0,0,0" size="600,380,204"/>
+        <bound id="new" mtx="0,175,0" size="590,20,200"/>
+        <bound id="bottom" mtx="0,-176,0" size="590,10,200"/>
+      </bounds>
+      <points>
+        <point id="front_front_center" count="9" space="0,32,0" pos="0,-127,0"/>
+        <point id="holesDoor" count="9" space="0,32,0" pos="0,-134,-92"/>
+      </points>
+      <relations>
+        <relation insertion="insert20" snap="front_front_center" models="SHLF02"/>
+        <relation insertion="insertFrame" snap="holesDoor" models="DR01"/>
+      </relations>
+    </logic>
+    <logic id="FR18_SPR" size="600,380,200">
+      <handlers>
+      </handlers>
+    </logic>
+	<logic id="SHLF02" size="562,18,164">
+      <points>
+        <point id="insert20" pos="0,0,10"/>
+        <point id="insert40" pos="0,0,8"/>
+        <point id="top" size="550,160,0" pos="0,9,0"/>
+      </points>
+      <relations>       
+      </relations>
+      <handlers>
+      </handlers>
+    </logic>
+	<logic id="DR01">
+      <bounds>
+        <bound id="bound" mtx="0,0,0" size="595,381,16"/>
+      </bounds>
+      <points>
+        <point id="insertFrame" pos="0,-134,18"/>
+      </points>
+      <relations>
+      </relations>
+      <handlers>
+      </handlers>
+    </logic>
+  </plannerLogics>
+</definition_data>

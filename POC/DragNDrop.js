@@ -22,8 +22,8 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	    materialBox.diffuseTexture = new BABYLON.Texture(texturePath, scene);
 	    materialBox.specularColor = BABYLON.Color3.Black();
 	    currentObject.material = materialBox;
-	    currentObject.position.y = 2;
-	    currentObject.position.x = pos;
+	    //currentObject.position.y = 2;
+	    currentObject.position = pos;
 	    engine.hideLoadingUI();
 	    
 	    currentObject.onPointerDown = onPointerDown;
@@ -114,15 +114,16 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	    	{
 	    		var closestSnap = findClosestSnap(currentObject.position,"door",collMesh.snapArray);
 
-	    		console.log(collMesh.uid + ":" +collMesh.snapArray);
+	    		//console.log(collMesh.uid + ":" +collMesh.snapArray);
 
 	    		if(closestSnap)
 	    		{
 	    			closestSnap.isSnapped = true;
-	    			currentObject.parent = collMesh
+	    			currentObject.parent = collMesh;
 		    		isSnapped = true;
 		    		currentObject.scaling = new BABYLON.Vector3(1,1,1);
-		    		currentObject.locallyTranslate(new BABYLON.Vector3(5, 12, -270));
+		    		currentObject.rotation = BABYLON.Vector3.Zero();
+		    		currentObject.locallyTranslate(closestSnap.point);
 		    		lastValidPos = currentObject.position;
 	    		}
 	    		else
@@ -135,14 +136,30 @@ var DragNDrop = function (pos,model, path, modelFilename, texturePath, tag){
 	    	}
 	    	else if(collMesh && tag == "frame" && collMesh.tag == "frame") // frame with frame
 	    	{
-	    		currentObject.parent = collMesh
-	    		isSnapped = true;
-	    		currentObject.scaling = new BABYLON.Vector3(1,1,1);
-	    		currentObject.locallyTranslate(new BABYLON.Vector3(3, 380, 0));
-	    		lastValidPos = currentObject.position;
+	    		var closestSnap = findClosestSnap(currentObject.position,"frame",collMesh.snapArray);
+	    		if(closestSnap)
+	    		{
+	    			closestSnap.isSnapped = true;
+	    			currentObject.parent = collMesh;
+		    		isSnapped = true;
+		    		currentObject.scaling = new BABYLON.Vector3(1,1,1);
+		    		currentObject.locallyTranslate(closestSnap.point);
+		    		currentObject.rotation = BABYLON.Vector3.Zero();
+		    		lastValidPos = currentObject.position;
+	    		}
+	    		else
+	    		{
+	    			showCollision(collMesh);
+	    		}
+	    		
 	    		return;
 	    	}
 	    	else if(collMesh && tag == "frame" && collMesh.tag == "door")
+	    	{
+	    		showCollision(collMesh);
+	    	    return;		
+	    	}
+	    	else if(collMesh && tag == "door" && collMesh.tag == "door")
 	    	{
 	    		showCollision(collMesh);
 	    	    return;		
